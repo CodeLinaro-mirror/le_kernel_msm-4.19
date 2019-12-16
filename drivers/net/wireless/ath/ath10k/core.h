@@ -875,6 +875,12 @@ enum ath10k_tx_pause_reason {
 	ATH10K_TX_PAUSE_MAX,
 };
 
+enum ath10k_dt_coex_support_flag {
+	ATH10K_DT_COEX_NOT_FOUND,
+	ATH10K_DT_COEX_SUPPORTED,
+	ATH10K_DT_COEX_NOT_SUPPORTED,
+};
+
 struct ath10k_fw_file {
 	const struct firmware *firmware;
 
@@ -1221,6 +1227,9 @@ struct ath10k {
 	struct work_struct radar_confirmation_work;
 	struct ath10k_bus_params bus_param;
 	struct completion peer_delete_done;
+
+	enum ath10k_dt_coex_support_flag coex_support;
+	int coex_gpio_pin;
 
 	/* must be last */
 	u8 drv_priv[0] __aligned(sizeof(void *));
